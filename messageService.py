@@ -1,3 +1,5 @@
 import messageProducer
-def publish_message(message):
-    messageProducer.publish_message(message)
+def publish_message(slack_channel, message):
+    messageProducer.publish_message(slack_channel, message)
+
+
