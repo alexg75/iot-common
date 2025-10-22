@@ -3,7 +3,7 @@ import json
 
 ACCESS_TOKEN = "access_token"
 REFRESH_TOKEN = "refresh_token"
-TOKEN_FILE = "/token.json"
+TOKEN_FILE = "./token.json"
 TOPIC_NAME = 'slack-token'
 
 log = logger.setup_logger("iot-common")
