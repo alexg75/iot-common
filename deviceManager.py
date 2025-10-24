@@ -12,17 +12,17 @@ OFF = "off"
 log = logger.setup_logger("deviceManager")
 
 async def turn_the_device_on_or_off(alias, operation):
-    log.info(f"{alias}-{operation}")
-    # try:
-    #     # if alias == 'Fan' or alias == 'Radiator':
-    #     if (alias == 'Radiator'):        
-    #         await turn_the_device_on_or_tplink(alias, operation)
-    #     else:
-    #         await turn_the_device_on_or_off_tapo(alias, operation)
-    # except Exception as e:
-    #     error_message = f"rp-radiator. Device {alias} failed to swith {operation}. Exception: {e}"
-    #     log.error(error_message)   
-    #     genericMessageProducer.publish_message("error",error_message)           
+    log.info(f"FOR NOW: {alias}-{operation}")
+    try:
+        # if alias == 'Fan' or alias == 'Radiator':
+        # if (alias == 'Radiator'):        
+        #     await turn_the_device_on_or_tplink(alias, operation)
+        # else:
+        await turn_the_device_on_or_off_tapo(alias, operation)
+    except Exception as e:
+        error_message = f"rp-radiator. Device {alias} failed to swith {operation}. Exception: {e}"
+        log.error(error_message)   
+        genericMessageProducer.publish_message("error",error_message)           
 
 async def turn_the_device_on_or_off_tapo(alias, operation):    
     ip = configUtils.getIp(alias=alias)
