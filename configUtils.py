@@ -1,5 +1,6 @@
 import json
 import logger
+import os
 
 
 CONFIG_FILE = "/iot/config.json"
@@ -32,3 +33,13 @@ def getAlias(ip):
                 return alias
         log.error(f"Cannot find a alias for IP: {ip}")
         raise Exception(f"Cannot find a alias for IP: {ip}") 
+    
+def isConfigReady():
+    if os.path.isfile(CONFIG_FILE):
+        file_info = os.stat(CONFIG_FILE)        
+        log.info(f"{CONFIG_FILE} size is: {file_info.st_size}")
+
+        if (file_info.st_size == 0):
+            return False
+        
+    return True
