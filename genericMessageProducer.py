@@ -4,14 +4,23 @@ import logger
 
 log = logger.setup_logger("genericProducer")
 
+def publish(topic, message):
+    try:
+        producer = KafkaProducer(bootstrap_servers=['rp-queue2:29092'],value_serializer=lambda x: dumps(x).encode('utf-8'))                
+        producer.send(str(topic), message)
+        log.info(f"MESSAGE {message} sent to {topic}")
+    except Exception as e:
+        log.error(f"MESSAGE {message} not sent to {topic}")
+        log.error(e)
+
 def publish_message(topic, message):
     try:
         producer = KafkaProducer(bootstrap_servers=['rp-queue2:29092'],value_serializer=lambda x: dumps(x).encode('utf-8'))        
         formattedMessage = formatMessage(message)
         producer.send(str(topic), value=formattedMessage)
-        log.info(f"MESSAGE {message} sent to {topic}")
+        log.info(f"MESSAGE {formattedMessage} sent to {topic}")
     except:
-        log.error(f"MESSAGE {message} not sent to {topic}")
+        log.error(f"MESSAGE {formattedMessage} not sent to {topic}")
 
 
 def formatMessage(message):
